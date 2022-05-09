@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<body>
+    <div>
+        <input id="output">
+        <br>
+        <button onclick="addToTextBox('btn1','.,/1')" style="height:50px; width: 55px; margin-top: 2px; ">1 <br>.,!</button>
+        <button onclick="addToTextBox('btn2','abc2')" style="height:50px; width: 55px;">2 <br> abc</button>
+        <button onclick="addToTextBox('btn3','def3')" style="height:50px; width: 55px;">3<br>def</button>
+        <br>
+        <button onclick="addToTextBox('btn4','ghi4')" style="height:50px; width: 55px; margin-top: 2px;">4<br>ghi</button>
+        <button onclick="addToTextBox('btn5','jkl5')" style="height:50px; width: 55px;">5<br>jkl</button>
+        <button onclick="addToTextBox('btn6','mno6')" style="height:50px; width: 55px; ">6<br>mno</button>
+        <br>
+        <button onclick="addToTextBox('btn7','pqrs7')" style="height:50px; width: 55px; margin-top: 2px;">7<br>pqrs</button>
+        <button onclick="addToTextBox('btn8','tuv8')" style="height:50px; width: 55px;">8<br>tuv</button>
+        <button onclick="addToTextBox('btn9','wxyz9')" style="height:50px; width: 55px;">9<br>wxyz</button>
+        <br>
+        <button onclick="addToTextBox('0')" style="height:50px; width: 55px; margin-top: 2px;">0</button>
+        <button onclick="addToTextBox('*')" style="height:50px; width: 55px;">*</button>
+        <button onclick="addToTextBox('#')" style="height:50px; width: 55px;">#</button>
+    </div>
+</body>
+<script>
+    var lastBtnId = null;
+    var lastSequenceIndex = null;
+    var resetLastTimer;
+    function addToTextBox(btnId,sequence){
+        if(lastBtnId == btnId){
+            var result = document.getElementById('output').value;    
+            result = result.substring(0,result.length-1);
+            if(lastSequenceIndex == sequence.length-1) {
+                lastSequenceIndex = -1;
+            }
+            result += sequence[lastSequenceIndex+1];
+            document.getElementById("output").value= result;
+            lastBtnId = btnId
+            lastSequenceIndex++;
+        }
+        else{
+            document.getElementById("output").value+= sequence[0];
+            lastBtnId = btnId
+            lastSequenceIndex = 0;
+        }
+        if(resetLastTimer != null){
+            clearTimeout(resetLastTimer);
+            resetLastTimer = null;
+        }
+        resertLastTimer = setTimeout(resetLast , 2000);
+    }
+    function resetLast(){
+        lastBtnId = null;
+        sequence = null;
+        console.log((new Date()).toISOString());
+    }
+
+
+    </script>
+</html>
